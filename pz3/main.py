@@ -34,7 +34,7 @@ class TodoJournal:
              ensure_ascii=False,
          )
 
-    def add_entry(self.path, new_entry):
+    def add_entry(self, new_entry):
      data=self._parse()
 
      name = data["name"]
@@ -47,26 +47,26 @@ class TodoJournal:
          "todos": todos,
      }
 
-    self._update(new_data)
+     self._update(new_data)
 
 
 
-    # def remove_todo(path_todo, index):
-    #     data = parse_todo(path_todo)
-    #     name = data["name"]
-    #     todos = data["todos"]
-    #
-    #     todos.remove(todos[index])
-    #
-    #     new_data = {
-    #         "name": name,
-    #         "todos": todos,
-    #     }
-    #
-    #     update_todo(path_todo, new_data)
-    #
-    #
-    #
+    def remove_entry(self, index):
+         data = self._parse()
+         name = data["name"]
+         todos = data["todos"]
+
+         todos.remove(todos[index])
+
+         new_data = {
+             "name": name,
+             "todos": todos,
+         }
+
+         self._update(new_data)
+
+
+
     # def parse_todo(path_todo):
     #     try:
     #         with open(path_todo, 'r') as todo_file:
