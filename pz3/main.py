@@ -65,39 +65,13 @@ class TodoJournal:
 
          self._update(new_data)
 
-
-
-    # def parse_todo(path_todo):
-    #     try:
-    #         with open(path_todo, 'r') as todo_file:
-    #             data = json.load(todo_file)
-    #         return data
-    #     except FileNotFoundError as e:
-    #         print(f"{e}")
-    #         # или свое исключение
-    #         print(f"Не существует такой тудушки: {path_todo}")
-    #         sys.exit(1)
-    #
-    #
-    #
-    # def add_todo(path_todo, new_todo):
-    #     with open(path_todo, 'r') as todo_file:
-    #         data = json.load(todo_file)
-    #
-    #     name = data["name"]
-    #     todos = data["todos"]
-    #
-    #     todos.append(new_todo)
-    #
-    #     new_data = {
-    #         "name": name,
-    #         "todos": todos,
-    #     }
-    #
-    #     update_todo(path_todo, new_data)
-    #
-    #
-
-    #
-    # if __name__ == '__main__':
-    #     main()
+    def _parse(self):
+        try:
+            with open(self.path_todo, 'r') as todo_file:
+                data = json.load(todo_file)
+            return data
+        except FileNotFoundError as error:
+            print(f"{error}")
+            # или свое исключение
+            print(f"Не существует такой тудушки: {self.path_todo}")
+            sys.exit(1)
