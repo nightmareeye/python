@@ -71,8 +71,7 @@ class TodoJournal:
                 todo_file,
                 sort_keys=True,
                 indent=4,
-                ensure_ascii=False,
-         )
+                ensure_ascii=False,)
     def add_entry(self, new_entry):
         """
         Adds new todo to json-file
