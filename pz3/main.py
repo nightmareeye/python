@@ -8,9 +8,7 @@ def main():
     TodoJournal.create(json_file, "test2")
 
     todo = TodoJournal(json_file, "my_task")
-    # todo.create()
     # json_file = "/not-valid.json"
-
     for i in range(1, 5):
         todo.add_entry(f"task{i}")
     todo.remove_entry(1)
