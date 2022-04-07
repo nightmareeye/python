@@ -21,7 +21,6 @@ class TodoJournal:
         Describes path (where todo-file must be located)
     name : str
         Describes name (name of the todo-file)
-    ...
     Methods
     -------
     create():
@@ -51,7 +50,6 @@ class TodoJournal:
         Parameters
         ----------
         None
-        ...
         Returning value
         ---------------
         None
@@ -80,7 +78,6 @@ class TodoJournal:
         ----------
         new_entry : str
             Describes new todo
-        ...
         Returning value
         ---------------
         None
@@ -106,7 +103,6 @@ class TodoJournal:
         ----------
         index : int
             Describes the index of todo to remove
-        ...
         Returning value
         ---------------
         None
