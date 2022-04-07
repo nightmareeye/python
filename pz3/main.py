@@ -135,5 +135,8 @@ class TodoJournal:
         except TimeoutError as error:
             print(f"{error}")
             print(f"Превышено время ожидания")
+        except RuntimeError as error:
+            print(f"{error}")
+            print(f"Превышено время ожидания 2")
 if __name__ == '__main__':
     main()
