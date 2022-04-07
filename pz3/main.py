@@ -136,5 +136,8 @@ class TodoJournal:
         except PermissionError as error:
             print(f"{error}")
             print(f"Отуствует доступ к файлу: {self.path}")
+        except TimeoutError as error:
+            print(f"{error}")
+            print(f"Превышено время ожидания")
 if __name__ == '__main__':
     main()
