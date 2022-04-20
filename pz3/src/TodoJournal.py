@@ -13,8 +13,6 @@ def main():
     for i in todo:
         print(i)
     print(todo[0])
-    
-
 class TodoJournal:
     """
     Class for Todos
@@ -51,22 +49,19 @@ class TodoJournal:
 
     def __len__(self):
         return len(self.entries)
-    
     def __iter__(self):
-        self.i = 0
+        self.itr = 0
         return self
 
     def __next__(self):
-        if self.i < len(self):
-            result = self.entries[self.i]
-            
-            self.i += 1
+        if self.itr < len(self):
+            result = self.entries[self.itr]
+            self.itr += 1
             return result
         else:
             raise StopIteration
     def __getitem__(self, key):
-       return self.entries[key]
-
+        return self.entries[key]
     @staticmethod
     def create(filename, name):
         """
@@ -151,12 +146,10 @@ class TodoJournal:
             print(f"Отуствует доступ к файлу: {self.path}")
         except TimeoutError as error:
             print(f"{error}")
-            print(f"Превышено время ожидания")
+            print("Превышено время ожидания")
         except RuntimeError as error:
             print(f"{error}")
-            print(f"Превышено время ожидания 2")
+            print("Превышено время ожидания 2")
 
 if __name__ == '__main__':
     main()
-else:
-    print('xuy')

@@ -1,11 +1,10 @@
-from base64 import encode
-from encodings import utf_8
+"""TodoJournal tests"""
 import json
+import pytest
 from src.TodoJournal import TodoJournal
 
 def test_init():
     """Проверка корректности инициализации TodoJournal"""
-    # TODO проблема. чтобы сейчас протестировать нужно знать путь до тудушки, ее имя.
     todo = TodoJournal("1.json")
     entries = todo.entries
     name = todo.name
@@ -13,8 +12,8 @@ def test_init():
     expected_name = "test3"
     assert entries == expected_entries
     assert name == expected_name
-
 def test_create_journal(tmpdir):
+    """Проверка корректности создания TodoJournal"""
     todo_filename = "test_todo"
     todo = tmpdir.join(todo_filename)
     TodoJournal.create(todo, "test")
@@ -26,19 +25,48 @@ def test_create_journal(tmpdir):
         },
         indent=4)
     assert expected_todo == todo.read()
-
 def test_add_entry(tmpdir):
+    """Проверка корректности добавления entries в TodoJournal"""
     todo_filename = "test_todo"
     todo = tmpdir.join(todo_filename)
     TodoJournal.create(todo, "test")
     todo_jrnl = TodoJournal(todo)
-    todo_jrnl.add_entry("Сходить за молоком")
+    todo_jrnl.add_entry("Go buy milk")
 
     expected_todo = json.dumps(
         {
         "name": "test",
-        "todos": ["Сходить за молоком"]
+        "todos": ["Go buy milk"]
         },
         indent=4,
         ensure_ascii=False,)
     assert expected_todo == todo.read()
+@pytest.fixture()
+def todo_journal_with_3_entries(tmpdir):
+    """3 entries"""
+    todo_filename = "test_todo"
+    todo_path = tmpdir.join(todo_filename)
+    with open(todo_path, "w",encoding="utf-8") as file:
+        json.dump(
+            {
+                "name": "test",
+                "todos": ["first entry", "second_entry", "third entry"]
+            },
+            file,
+            indent=4,
+            ensure_ascii=False, )
+    return todo_path
+@pytest.fixture()
+def todo_json_after_remove_second_entry():
+    """remove second etry"""
+    return json.dumps(
+        {
+            "name": "test",
+            "todos": ["first entry", "third entry"]
+        },
+        indent=4,
+        ensure_ascii=False, )
+@pytest.fixture()
+def todo_object_with_with_3_entries(todo_journal_with_3_entries):
+    """object with 3 entries"""
+    return TodoJournal(todo_journal_with_3_entries)
