@@ -32,7 +32,7 @@ class TodoJournal:
     remove_entry(index):
         Removes todo from json-file
     """
-    def __init__(self, path, name):
+    def __init__(self, path_todo):
         """
         Sets all necessary attributes for TodoJournal object
         ...
@@ -43,8 +43,11 @@ class TodoJournal:
         path : str
             Describes path (where todo-file must be located)
         """
-        self.path = path
-        self.name = name
+        self.path_todo = path_todo
+        self.name=self._parse()["name"]
+        self.entries=self._parse()["todos"]
+    def __len__(self):
+        return len(self.entries)
 
     @staticmethod
     def create(filename, name):
