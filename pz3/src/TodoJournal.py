@@ -13,6 +13,7 @@ def main():
     for i in todo:
         print(i)
     print(todo[0])
+    todo.print()
 class TodoJournal:
     """
     Class for Todos
@@ -91,6 +92,12 @@ class TodoJournal:
                 indent=4,
                 ensure_ascii=False,)
 
+    def print(self):
+        """Added beautiful output"""
+        print("====TODOs====")
+        for td_list in self:
+            print(td_list)
+        print("=============")
     def add_entry(self, new_entry):
         """
         Adds new todo to json-file
