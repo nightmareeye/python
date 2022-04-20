@@ -4,14 +4,16 @@ import sys
 
 def main():
     """testing functionality of TodoJournal"""
-    json_file = "1.json"
-    TodoJournal.create(json_file, "test2")
+    json_file = "./1.json"
+    TodoJournal.create(json_file, "test3")
 
-    todo = TodoJournal(json_file, "my_task")
-    # json_file = "/not-valid.json"
+    todo = TodoJournal(json_file)
     for i in range(1, 5):
         todo.add_entry(f"task{i}")
-    todo.remove_entry(1)
+    for i in todo:
+        print(i)
+    print(todo[0])
+    
 
 class TodoJournal:
     """
@@ -43,11 +45,27 @@ class TodoJournal:
         path : str
             Describes path (where todo-file must be located)
         """
-        self.path_todo = path_todo
-        self.name=self._parse()["name"]
-        self.entries=self._parse()["todos"]
+        self.path = path_todo
+        self.name = self._parse()["name"]
+        self.entries = self._parse()["todos"]
+
     def __len__(self):
         return len(self.entries)
+    
+    def __iter__(self):
+        self.i = 0
+        return self
+
+    def __next__(self):
+        if self.i < len(self):
+            result = self.entries[self.i]
+            
+            self.i += 1
+            return result
+        else:
+            raise StopIteration
+    def __getitem__(self, key):
+       return self.entries[key]
 
     @staticmethod
     def create(filename, name):
@@ -77,6 +95,7 @@ class TodoJournal:
                 sort_keys=True,
                 indent=4,
                 ensure_ascii=False,)
+
     def add_entry(self, new_entry):
         """
         Adds new todo to json-file
@@ -89,19 +108,16 @@ class TodoJournal:
         ---------------
         None
         """
-        data = self._parse()
-
-        name = data["name"]
-        todos = data["todos"]
-
-        todos.append(new_entry)
+        self.entries.append(new_entry)
 
         new_data = {
-            "name": name,
-            "todos": todos,
+            "name": self.name,
+            "todos": self.entries,
         }
 
         self._update(new_data)
+
+
     def remove_entry(self, index):
         """
         Removes todo from json-file
@@ -114,17 +130,11 @@ class TodoJournal:
         ---------------
         None
         """
-        data = self._parse()
-        name = data["name"]
-        todos = data["todos"]
-
-        todos.remove(todos[index])
-
         new_data = {
-            "name": name,
-            "todos": todos,
+            "name": self.name,
+            "todos": self.entries,
         }
-
+        self.entries.remove(self.entries[index])
         self._update(new_data)
 
     def _parse(self):
@@ -145,5 +155,8 @@ class TodoJournal:
         except RuntimeError as error:
             print(f"{error}")
             print(f"Превышено время ожидания 2")
+
 if __name__ == '__main__':
     main()
+else:
+    print('xuy')
