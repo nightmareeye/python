@@ -5,8 +5,10 @@ import sys
 def main():
     """testing functionality of TodoJournal"""
     json_file = "1.json"
+    TodoJournal.create(json_file, "test2")
+
     todo = TodoJournal(json_file, "my_task")
-    todo.create()
+    # json_file = "/not-valid.json"
     for i in range(1, 5):
         todo.add_entry(f"task{i}")
     todo.remove_entry(1)
@@ -43,25 +45,27 @@ class TodoJournal:
         """
         self.path = path
         self.name = name
-    def create(self):
+
+    @staticmethod
+    def create(filename, name):
         """
-        Creates json-file for todos
-        ...
-        Parameters
-        ----------
-        None
-        Returning value
-        ---------------
-        None
-        """
-        with open(self.path, "w", encoding='utf-8') as todo_file:
+               Creates json-file for todos
+               ...
+               Parameters
+               ----------
+               None
+               Returning value
+               ---------------
+               None
+               """
+        with open(filename, "w", encoding='utf-8') as todo_file:
             json.dump(
-                {"name": self.name, "todos": []},
+                {"name": name, "todos": []},
                 todo_file,
                 sort_keys=True,
                 indent=4,
-                )
-
+                ensure_ascii=False,
+            )
     def _update(self, new_data):
         with open(self.path, "w", encoding='utf-8') as todo_file:
             json.dump(
