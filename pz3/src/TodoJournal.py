@@ -65,15 +65,15 @@ class TodoJournal:
     @staticmethod
     def create(filename, name):
         """
-               Creates json-file for todos
-               ...
-               Parameters
-               ----------
-               None
-               Returning value
-               ---------------
-               None
-               """
+        Creates json-file for todos
+        ...
+        Parameters
+        ----------
+        None
+        Returning value
+        ---------------
+        None
+        """
         with open(filename, "w", encoding='utf-8') as todo_file:
             json.dump(
                 {"name": name, "todos": []},

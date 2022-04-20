@@ -70,3 +70,12 @@ def todo_json_after_remove_second_entry():
 def todo_object_with_with_3_entries(todo_journal_with_3_entries):
     """object with 3 entries"""
     return TodoJournal(todo_journal_with_3_entries)
+def test_remove_entry(todo_object_with_with_3_entries, todo_json_after_remove_second_entry):
+    """testing removal of entries"""
+    todo_object_with_with_3_entries.remove_entry(1)
+    expected_todo_json_after_remove_second = todo_json_after_remove_second_entry
+    assert expected_todo_json_after_remove_second == todo_object_with_with_3_entries.path.read()
+def test_parse():
+    """testing parse"""
+    with pytest.raises(SystemExit):
+        TodoJournal("./data/ggg")
