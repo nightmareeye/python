@@ -88,3 +88,19 @@ def test_printt(tmpdir):
     todo_jrnl.add_entry("test ent")
     expected_output='====TODOs====\ntest ent\n============='
     assert expected_output == todo_jrnl.print()
+todos=[('todo 1'),('todo 2'),('todo 3')]
+@pytest.mark.parametrize('ent',todos)
+def test_add_entry_parm(tmpdir,ent):
+    todo_filename="test_todo"
+    todo=tmpdir.join(todo_filename)
+    TodoJournal.create(todo,"test")
+    todo_jrnl= TodoJournal(todo)
+    todo_jrnl.add_entry(ent)
+
+    expected_todo=json.dumps(
+        {
+            "name":"test",
+            "todos":[ent]
+        },
+        indent=4,ensure_ascii=False,)
+    assert expected_todo==todo.read()
