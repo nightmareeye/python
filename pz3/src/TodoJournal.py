@@ -14,7 +14,6 @@ def main():
         print(i)
     print(todo[0])
     print(todo.print())
-    #print("====TODOs====\ntest ent\n=============")
 class TodoJournal:
     """
     Class for Todos
@@ -95,12 +94,11 @@ class TodoJournal:
 
     def print(self):
         """Added beautiful output"""
-        str=""
-        str+='====TODOs====\n'
+        str_pr='====TODOs====\n'
         for td_list in self:
-            str+=td_list+'\n'
-        str+='============='
-        return str
+            str_pr+=td_list+'\n'
+        str_pr+='============='
+        return str_pr
     def add_entry(self, new_entry):
         """
         Adds new todo to json-file

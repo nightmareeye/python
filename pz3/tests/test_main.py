@@ -91,6 +91,7 @@ def test_printt(tmpdir):
 todos=[('todo 1'),('todo 2'),('todo 3')]
 @pytest.mark.parametrize('ent',todos)
 def test_add_entry_parm(tmpdir,ent):
+    """Testing with parametrisation"""
     todo_filename="test_todo"
     todo=tmpdir.join(todo_filename)
     TodoJournal.create(todo,"test")
