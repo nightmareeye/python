@@ -79,3 +79,12 @@ def test_parse():
     """testing parse"""
     with pytest.raises(SystemExit):
         TodoJournal("./data/ggg")
+def test_printt(tmpdir):
+    """Testing nice output"""
+    todo_filename = "test_todo"
+    todo = tmpdir.join(todo_filename)
+    TodoJournal.create(todo,"print")
+    todo_jrnl=TodoJournal(todo)
+    todo_jrnl.add_entry("test ent")
+    expected_output='====TODOs====\ntest ent\n============='
+    assert expected_output == todo_jrnl.print()
